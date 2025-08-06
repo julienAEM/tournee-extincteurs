@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapports des tournées des extincteurs</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    .company-header {
+      background-color: #253746;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .company-header img.logo {
+      height: 50px;
+      margin-right: 20px;
+    }
+    .company-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    .report-container {
+      margin: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #253746;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <header class="company-header">
+    <img src="aem_logo.png" alt="Logo AEM" class="logo">
+    <h1>Rapports des tournées des extincteurs</h1>
+  </header>
+  <div class="report-container">
+    <h2>Rapports soumis</h2>
+    <table id="rapports-table">
+      <thead>
+        <tr>
+          <th>Nom</th>
+          <th>Email</th>
+          <th>Date</th>
+          <th>Commentaires</th>
+          <th>Fichier</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Les rapports seront insérés ici par JavaScript -->
+      </tbody>
+    </table>
+  </div>
+  <script>
+    // Fetch the CSV file and populate the table
+    fetch('rapports.csv')
+      .then(function(response) {
+        return response.text();
+      })
+      .then(function(csv) {
+        // Trim whitespace and split into lines
+        var lines = csv.trim().split('\n');
+        // Remove header row
+        lines.shift();
+        var tbody = document.getElementById('rapports-table').querySelector('tbody');
+        lines.forEach(function(line) {
+          if (line.trim() === '') return;
+          // Split by comma (simple CSV handling)
+          var cols = line.split(',');
+          var tr = document.createElement('tr');
+          cols.forEach(function(col, index) {
+            var td = document.createElement('td');
+            col = col.trim();
+            // If it's the last column (file), create a link if there is a value
+            if (index === cols.length - 1 && col !== '') {
+              var a = document.createElement('a');
+              a.href = col;
+              a.textContent = 'Voir fichier';
+              a.target = '_blank';
+              td.appendChild(a);
+            } else {
+              td.textContent = col;
+            }
+            tr.appendChild(td);
+          });
+          tbody.appendChild(tr);
+        });
+      })
+      .catch(function(error) {
+        console.error('Erreur lors du chargement des rapports:', error);
+      });
+  </script>
+</body>
+</html>
