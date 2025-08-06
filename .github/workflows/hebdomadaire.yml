@@ -1,0 +1,14 @@
+name: Mise à jour hebdomadaire des rapports
+
+on:
+  schedule:
+    - cron: '0 13 * * 1'  # tous les lundis à 9 h (Toronto/Montréal)
+
+jobs:
+  update_reports:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Placeholder script
+        run: echo "Tâche hebdomadaire - à personnaliser pour compiler les rapports."
