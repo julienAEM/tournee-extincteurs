@@ -2,7 +2,7 @@ name: Mise à jour hebdomadaire des rapports
 
 on:
   schedule:
-    - cron: '0 13 * * 1'  # tous les lundis à 9 h (Toronto/Montréal)
+    - cron: '0 13 * * 1'   # Tous les lundis à 9 h (Toronto/Montréal)
 
 jobs:
   update_reports:
@@ -10,5 +10,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Placeholder script
-        run: echo "Tâche hebdomadaire - à personnaliser pour compiler les rapports."
+
+      # Vous pouvez ajouter ici des étapes pour générer ou mettre à jour rapports.csv
+
+      - name: Envoyer le rapport hebdomadaire par courriel
+        uses: dawidd6/action-send-mail@v6
+        with:
+          connection_url: ${{ secrets.SMTP_CONNECTION_URL }}
+          to: destinataire1@example.com, destinataire2@example.com
+          from: 'Tournée Extincteurs <no-reply@aemhpa.com>'
+          subject: Rapport hebdomadaire des extincteurs
+          body: |
+            Bonjour,
+
+            Vous trouverez en pièce jointe le rapport hebdomadaire des extincteurs.
+
+            Cordialement,
+            L'équipe.
+          attachments: rapports.csv
