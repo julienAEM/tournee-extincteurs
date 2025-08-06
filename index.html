@@ -4,9 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tournée des extincteurs</title>
+  <style>
+    /* Base styles matching AEM branding */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+    }
+    /* Header with company colors */
+    .company-header {
+      background-color: #253746; /* dark blue similar to AEM header */
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    .company-header img.logo {
+      height: 50px;
+      margin-right: 20px;
+    }
+    .company-header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    form {
+      margin: 20px;
+    }
+    /* Styled submit button */
+    button {
+      background-color: #0077C8; /* AEM accent blue */
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    /* Table styling */
+    #informations {
+      margin: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #253746;
+      color: #ffffff;
+    }
+    tr.group th {
+      background-color: #0077C8;
+      color: #ffffff;
+    }
+  </style>
 </head>
 <body>
-  <h1>Tournée des extincteurs</h1>
+  <!-- Company branded header with logo and title -->
+  <header class="company-header">
+    <img src="aem_logo.png" alt="Logo AEM" class="logo">
+    <h1>Tournée des extincteurs</h1>
+  </header>
   <form action="https://fabform.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data">
     <label for="nom">Nom :</label>
     <input type="text" id="nom" name="nom" required>
